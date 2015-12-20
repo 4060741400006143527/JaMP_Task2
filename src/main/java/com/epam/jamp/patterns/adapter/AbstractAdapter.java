@@ -1,6 +1,7 @@
 package com.epam.jamp.patterns.adapter;
 
 import java.util.List;
+import java.util.Stack;
 
 public abstract class AbstractAdapter<E> implements CollectionAdapter<E> {
 
@@ -23,5 +24,5 @@ public abstract class AbstractAdapter<E> implements CollectionAdapter<E> {
 
     public void setList(List<E> list) {
         this.list = list;
-    }
+    } 
 }

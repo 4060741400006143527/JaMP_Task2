@@ -1,6 +1,6 @@
 package com.epam.jamp.patterns.file;
 
-import com.epam.jamp.patterns.factory.person.model.Person;
+import com.epam.jamp.patterns.model.Person;
 
 public class PersonFileItemParser extends AbstractFileItemParser<Person> {
 

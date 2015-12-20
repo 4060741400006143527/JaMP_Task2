@@ -1,6 +1,6 @@
 package com.epam.jamp.patterns.factory.person;
 
-import com.epam.jamp.patterns.factory.person.model.Person;
+import com.epam.jamp.patterns.model.Person;
 import com.epam.jamp.patterns.file.FileItemReader;
 import com.epam.jamp.patterns.file.PersonParser;
 
@@ -15,6 +15,10 @@ public class FilePersonService implements PersonService {
 
     public FilePersonService() {
         initFileStorage();
+    }
+
+    public FilePersonService(String fileName) {
+        initFileStorageByName(fileName);
     }
 
     @Override
@@ -97,6 +101,14 @@ public class FilePersonService implements PersonService {
                 String fileName = bufferedReader.readLine();
                 file = createFileIfNotExists(fileName);
             }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    private void initFileStorageByName(String fileName) {
+        try {
+            file = createFileIfNotExists(fileName);
         } catch (IOException e) {
             System.err.println(e);
         }

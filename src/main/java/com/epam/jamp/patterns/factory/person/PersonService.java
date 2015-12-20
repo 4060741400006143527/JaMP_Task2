@@ -1,6 +1,6 @@
 package com.epam.jamp.patterns.factory.person;
 
-import com.epam.jamp.patterns.factory.person.model.Person;
+import com.epam.jamp.patterns.model.Person;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.epam.jamp.patterns.db;
 
 
-import com.epam.jamp.patterns.factory.person.model.Person;
+import com.epam.jamp.patterns.model.Person;
 
 import java.sql.*;
 import java.util.ArrayList;

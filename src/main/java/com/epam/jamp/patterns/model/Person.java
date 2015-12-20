@@ -1,4 +1,4 @@
-package com.epam.jamp.patterns.factory.person.model;
+package com.epam.jamp.patterns.model;
 
 public class Person {
 
