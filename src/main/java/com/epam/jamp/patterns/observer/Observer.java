@@ -1,8 +1,6 @@
 package com.epam.jamp.patterns.observer;
 
-public abstract class Observer {
+public interface Observer {
 
-    protected TextData textData;
-
-    public abstract void update(String word);
+    void update(String word);
 }

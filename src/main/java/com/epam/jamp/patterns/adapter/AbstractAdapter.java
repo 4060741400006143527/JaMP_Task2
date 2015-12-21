@@ -2,7 +2,7 @@ package com.epam.jamp.patterns.adapter;
 
 import java.util.List;
 
-public abstract class AbstractAdapter<E, T extends List<E>>  implements CollectionAdapter<E> {
+public abstract class AbstractAdapter<E, T extends List<E>>  implements Stack<E> {
 
     private T list;
 

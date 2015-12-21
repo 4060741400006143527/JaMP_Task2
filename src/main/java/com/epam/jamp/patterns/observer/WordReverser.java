@@ -2,14 +2,9 @@ package com.epam.jamp.patterns.observer;
 
 import com.epam.jamp.patterns.reader.TextReaderUtils;
 
-public class WordReverser extends Observer {
+public class WordReverser implements Observer {
 
     private String word;
-
-    public WordReverser(TextData textData) {
-        this.textData = textData;
-        textData.registerObserver(this);
-    }
 
     @Override
     public void update(String word) {

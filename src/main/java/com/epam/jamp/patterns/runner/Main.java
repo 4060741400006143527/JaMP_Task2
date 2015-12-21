@@ -1,7 +1,7 @@
 package com.epam.jamp.patterns.runner;
 
-import com.epam.jamp.patterns.adapter.CollectionAdapter;
-import com.epam.jamp.patterns.adapter.StackAdapter;
+import com.epam.jamp.patterns.adapter.ArrayListAdapter;
+import com.epam.jamp.patterns.adapter.Stack;
 import com.epam.jamp.patterns.composite.Directory;
 import com.epam.jamp.patterns.composite.File;
 import com.epam.jamp.patterns.decorator.*;
@@ -27,7 +27,7 @@ public class Main {
 
         // Adapter
 
-        CollectionAdapter<Long> arrayListAdapter = new StackAdapter<>();
+        Stack<Long> arrayListAdapter = new ArrayListAdapter<>();
         arrayListAdapter.push(1534L);
         arrayListAdapter.push(644L);
         arrayListAdapter.push(555L);
@@ -39,10 +39,18 @@ public class Main {
         String fileName = "observer.txt";
 
         TextData textData = new TextData();
-        WordCounter wordCounter = new WordCounter(textData);
-        NumberCounter numberCounter = new NumberCounter(textData);
-        LongestWordKeeper longestWordKeeper = new LongestWordKeeper(textData);
-        WordReverser wordReverser = new WordReverser(textData);
+
+        WordCounter wordCounter = new WordCounter();
+        textData.registerObserver(wordCounter);
+
+        NumberCounter numberCounter = new NumberCounter();
+        textData.registerObserver(numberCounter);
+
+        LongestWordKeeper longestWordKeeper = new LongestWordKeeper();
+        textData.registerObserver(longestWordKeeper);
+
+        WordReverser wordReverser = new WordReverser();
+        textData.registerObserver(wordReverser);
 
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
             stream.forEach(line -> {

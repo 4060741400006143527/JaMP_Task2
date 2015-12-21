@@ -2,14 +2,9 @@ package com.epam.jamp.patterns.observer;
 
 import com.epam.jamp.patterns.reader.TextReaderUtils;
 
-public class WordCounter extends Observer {
+public class WordCounter implements Observer {
 
     private int counter;
-
-    public WordCounter(TextData textData) {
-        this.textData = textData;
-        textData.registerObserver(this);
-    }
 
     @Override
     public void update(String word) {

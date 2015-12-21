@@ -1,6 +1,6 @@
 package com.epam.jamp.patterns.adapter;
 
-public interface CollectionAdapter<E> {
+public interface Stack<E> {
 
     /**
      * appends a given object
