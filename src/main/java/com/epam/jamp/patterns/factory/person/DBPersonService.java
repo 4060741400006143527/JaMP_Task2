@@ -12,19 +12,19 @@ public class DBPersonService implements PersonService {
 
     @Override
     public void write(Person person) {
-        Validator.validatePerson(person);
+        PersonValidator.validatePerson(person);
         try {
             personDao.save(person);
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println(e); // TODO: refactor to business exception
         }
     }
 
     @Override
     public void rewrite(Person person){
-        Validator.validatePerson(person);
+        PersonValidator.validatePerson(person);
         try {
-            personDao.update(person);
+            personDao.updatePersonIq(person);
         } catch (Exception e) {
             System.err.println(e);
         }
@@ -43,7 +43,7 @@ public class DBPersonService implements PersonService {
 
     @Override
     public List<Person> read(String name) {
-        Validator.validateName(name);
+        PersonValidator.validateName(name);
         List<Person> persons = null;
         try {
             persons = personDao.find(name);

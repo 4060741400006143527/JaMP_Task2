@@ -1,32 +1,23 @@
 package com.epam.jamp.patterns.runner;
 
-import com.epam.jamp.patterns.adapter.ArrayListAdapter;
 import com.epam.jamp.patterns.adapter.CollectionAdapter;
+import com.epam.jamp.patterns.adapter.StackAdapter;
 import com.epam.jamp.patterns.composite.Directory;
 import com.epam.jamp.patterns.composite.File;
-import com.epam.jamp.patterns.decorator.BasePersonInputStream;
-import com.epam.jamp.patterns.decorator.BasePersonOutputStream;
-import com.epam.jamp.patterns.decorator.CapitalLetterPersonInputStreamDecorator;
-import com.epam.jamp.patterns.decorator.LowLetterPersonOutputStreamDecorator;
-import com.epam.jamp.patterns.decorator.PersonInputStreamDecorator;
-import com.epam.jamp.patterns.decorator.PersonOutputStreamDecorator;
-import com.epam.jamp.patterns.factory.AbstractServiceFactory;
+import com.epam.jamp.patterns.decorator.*;
+import com.epam.jamp.patterns.factory.ServiceFactory;
 import com.epam.jamp.patterns.factory.ServiceType;
 import com.epam.jamp.patterns.factory.person.PersonService;
 import com.epam.jamp.patterns.model.Person;
-import com.epam.jamp.patterns.observer.LongestWordKeeper;
-import com.epam.jamp.patterns.observer.NumberCounter;
-import com.epam.jamp.patterns.observer.TextData;
-import com.epam.jamp.patterns.observer.WordCounter;
-import com.epam.jamp.patterns.observer.WordReverser;
+import com.epam.jamp.patterns.observer.*;
 import com.epam.jamp.patterns.proxy.FilePersonServiceProxy;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -36,10 +27,10 @@ public class Main {
 
         // Adapter
 
-        CollectionAdapter<Long> arrayListAdapter = new ArrayListAdapter<>(new ArrayList<>());
-        arrayListAdapter.push(new Long(1534));
-        arrayListAdapter.push(new Long(644));
-        arrayListAdapter.push(new Long(555));
+        CollectionAdapter<Long> arrayListAdapter = new StackAdapter<>();
+        arrayListAdapter.push(1534L);
+        arrayListAdapter.push(644L);
+        arrayListAdapter.push(555L);
 
         System.out.println(arrayListAdapter.pop());
 
@@ -85,8 +76,8 @@ public class Main {
                 }
                 ServiceType serviceType = ServiceType.getByServiceNumber(userInput);
                 if (serviceType != null) {
-                    AbstractServiceFactory abstractServiceFactory = serviceType.getServiceFactory();
-                    PersonService personService = abstractServiceFactory.createPeronService();
+                    ServiceFactory serviceFactory = serviceType.getServiceFactory();
+                    PersonService personService = serviceFactory.createPeronService();
                     PersonOperator operator = new PersonOperator(personService);
                     operator.imitateOperations();
                     operator.imitateIqOperations();

@@ -23,7 +23,7 @@ public class FilePersonService implements PersonService {
 
     @Override
     public void write(Person person) {
-        Validator.validatePerson(person);
+        PersonValidator.validatePerson(person);
         try {
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
             out.println(person.toString());
@@ -35,7 +35,7 @@ public class FilePersonService implements PersonService {
 
     @Override
     public void rewrite(Person person) {
-        Validator.validatePerson(person);
+        PersonValidator.validatePerson(person);
         try {
             List<Person> persons = readAll();
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
@@ -75,7 +75,7 @@ public class FilePersonService implements PersonService {
 
     @Override
     public List<Person> read(String name) {
-        Validator.validateName(name);
+        PersonValidator.validateName(name);
         List<Person> result = new ArrayList<>();
         FileItemReader<Person> reader = null;
         try {

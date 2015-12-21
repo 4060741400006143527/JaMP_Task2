@@ -11,7 +11,7 @@ public class PersonDao {
 
     private final ConnectionCreator connectionCreator = ConnectionCreator.getInstance();
 
-    public void save(Person person) throws SQLException {
+    public void save(Person person) throws SQLException, ClassNotFoundException {
         Connection connection = connectionCreator.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO Person (ID, F_NAME, L_NAME, AGE, IQ) VALUES (HIBERNATE_SEQUENCE.nextval, ?,?,?,?)");
@@ -29,7 +29,7 @@ public class PersonDao {
         }
     }
 
-    public void update(Person person) throws SQLException {
+    public void updatePersonIq(Person person) throws SQLException, ClassNotFoundException {
         Connection connection = connectionCreator.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE Person SET IQ = ? WHERE F_NAME = ? AND L_NAME = ? AND AGE = ?");
@@ -47,7 +47,7 @@ public class PersonDao {
         }
     }
 
-    public List<Person> find(String name) throws SQLException {
+    public List<Person> find(String name) throws SQLException, ClassNotFoundException {
         List<Person> persons = new ArrayList<Person>();
         Connection connection = connectionCreator.getConnection();
         try {
@@ -67,7 +67,7 @@ public class PersonDao {
         return persons;
     }
 
-    public List<Person> getAll() throws SQLException {
+    public List<Person> getAll() throws SQLException, ClassNotFoundException {
         List<Person> persons = new ArrayList<Person>();
         Connection connection = connectionCreator.getConnection();
         try {

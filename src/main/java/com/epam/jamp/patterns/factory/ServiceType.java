@@ -4,24 +4,24 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ServiceType implements ServiceFactory {
+public enum ServiceType implements FactoryProducer {
 
     DB("Db") {
         @Override
-        public AbstractServiceFactory getServiceFactory() {
+        public ServiceFactory getServiceFactory() {
             return new DBServiceFactory();
         }
     },
     FILE("File") {
         @Override
-        public AbstractServiceFactory getServiceFactory() {
+        public ServiceFactory getServiceFactory() {
             return new FileServiceFactory();
         }
     };
 
     private static final Map<String, ServiceType> serviceTypeMap = Collections.unmodifiableMap(initializeServiceTypeMap());
 
-    private String serviceNumber;
+    private final String serviceNumber;
 
     private ServiceType(String serviceNumber) {
         this.serviceNumber = serviceNumber;

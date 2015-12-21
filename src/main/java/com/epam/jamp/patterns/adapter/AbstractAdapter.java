@@ -1,13 +1,12 @@
 package com.epam.jamp.patterns.adapter;
 
 import java.util.List;
-import java.util.Stack;
 
-public abstract class AbstractAdapter<E> implements CollectionAdapter<E> {
+public abstract class AbstractAdapter<E, T extends List<E>>  implements CollectionAdapter<E> {
 
-    private List<E> list;
+    private T list;
 
-    public AbstractAdapter(List<E> list) {
+    public AbstractAdapter(T list) {
         this.list = list;
     }
 
@@ -18,11 +17,11 @@ public abstract class AbstractAdapter<E> implements CollectionAdapter<E> {
 
     public abstract E pop();
 
-    public List<E> getList() {
+    public T getList() {
         return list;
     }
 
-    public void setList(List<E> list) {
+    public void setList(T list) {
         this.list = list;
     } 
 }

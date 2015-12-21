@@ -3,10 +3,10 @@ package com.epam.jamp.patterns.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayListAdapter<E> extends AbstractAdapter<E> {
+public class ArrayListAdapter<E> extends AbstractAdapter<E, ArrayList<E>> {
 
-    public ArrayListAdapter(ArrayList<E> arrayList) {
-       super(arrayList);
+    public ArrayListAdapter() {
+       super(new ArrayList<>());
     }
 
     @Override

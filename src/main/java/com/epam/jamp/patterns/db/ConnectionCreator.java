@@ -2,6 +2,7 @@ package com.epam.jamp.patterns.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public final class ConnectionCreator {
 
@@ -11,7 +12,8 @@ public final class ConnectionCreator {
 
     private static volatile ConnectionCreator instance;
 
-    private ConnectionCreator() {}
+    private ConnectionCreator() {
+    }
 
     public static ConnectionCreator getInstance() {
         if (instance == null) {
@@ -24,14 +26,8 @@ public final class ConnectionCreator {
         return instance;
     }
 
-    public Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection(url, name, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connection;
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        return DriverManager.getConnection(url, name, password);
     }
 }
