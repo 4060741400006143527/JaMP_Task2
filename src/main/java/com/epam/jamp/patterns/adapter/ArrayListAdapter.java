@@ -16,6 +16,9 @@ public class ArrayListAdapter<E> extends AbstractAdapter<E, ArrayList<E>> {
         if (list.isEmpty()){
             throw new EmptyStackException();
         }
-        return list.get(list.size() - 1);
+        E lastElement = list.get(list.size() - 1);
+
+        list.remove(lastElement);
+        return lastElement;
     }
 }

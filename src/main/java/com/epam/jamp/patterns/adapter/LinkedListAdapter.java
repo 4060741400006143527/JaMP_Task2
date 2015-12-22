@@ -15,6 +15,9 @@ public class LinkedListAdapter<E> extends AbstractAdapter<E, LinkedList<E>> {
         if (list.isEmpty()){
             throw new EmptyStackException();
         }
-        return list.getLast();
+        E lastElement = list.getLast();
+
+        list.remove(lastElement);
+        return lastElement;
     }
 }
