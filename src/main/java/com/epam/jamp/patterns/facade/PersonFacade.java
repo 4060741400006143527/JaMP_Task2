@@ -14,7 +14,15 @@ public class PersonFacade {
     }
 
     public Person getSmarter(Person personOne, Person personTwo) {
-        return personOne.getIq() > personTwo.getIq() ? personOne : personTwo;
+        if (personOne.getIq() > personTwo.getIq()) {
+            return personOne;
+        }
+
+        if (personTwo.getIq() > personOne.getIq()) {
+            return personTwo;
+        }
+
+        return null;
     }
 
     public void moveIqAndStore(Person from, Person to, int iqAmount) {
