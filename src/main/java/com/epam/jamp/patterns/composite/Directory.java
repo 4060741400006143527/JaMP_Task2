@@ -24,16 +24,10 @@ public class Directory implements FSEntity {
         return size;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
-
-    @Override
-    public void setSize(int size) {
-        this.size = size;
-    }
-
+   
     public void add(FSEntity component) {
         components.add(component);
         size = size + component.getSize();

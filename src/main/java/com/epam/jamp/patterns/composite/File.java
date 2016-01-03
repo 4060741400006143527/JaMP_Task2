@@ -15,12 +15,10 @@ public class File implements FSEntity{
         return size;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
     public void setSize(int size) {
         this.size = size;
     }    
