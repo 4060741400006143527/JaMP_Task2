@@ -4,22 +4,14 @@ import com.epam.jamp.patterns.adapter.ArrayListAdapter;
 import com.epam.jamp.patterns.adapter.Stack;
 import com.epam.jamp.patterns.composite.Directory;
 import com.epam.jamp.patterns.composite.File;
-import com.epam.jamp.patterns.decorator.BasePersonInputStream;
-import com.epam.jamp.patterns.decorator.BasePersonOutputStream;
-import com.epam.jamp.patterns.decorator.CapitalLetterPersonInputStreamDecorator;
-import com.epam.jamp.patterns.decorator.FilePersonInputStream;
-import com.epam.jamp.patterns.decorator.FilePersonOutputStream;
-import com.epam.jamp.patterns.decorator.LowLetterPersonOutputStreamDecorator;
+import com.epam.jamp.patterns.decorator.*;
 import com.epam.jamp.patterns.factory.ServiceFactory;
 import com.epam.jamp.patterns.factory.ServiceType;
 import com.epam.jamp.patterns.factory.person.PersonService;
 import com.epam.jamp.patterns.model.Person;
-import com.epam.jamp.patterns.observer.LongestWordKeeper;
-import com.epam.jamp.patterns.observer.NumberCounter;
-import com.epam.jamp.patterns.observer.TextData;
-import com.epam.jamp.patterns.observer.WordCounter;
-import com.epam.jamp.patterns.observer.WordReverser;
-import com.epam.jamp.patterns.proxy.PersonServiceProxy;
+import com.epam.jamp.patterns.observer.*;
+import com.epam.jamp.patterns.proxy.FilePersonServiceProxy;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,11 +27,12 @@ public class Main {
 
         // Adapter
 
-        Stack<Long> arrayListAdapter = new ArrayListAdapter<>();
+        Stack<Long> arrayListAdapter = new LinkedListAdapter<>();
         arrayListAdapter.push(1534L);
         arrayListAdapter.push(644L);
         arrayListAdapter.push(555L);
 
+        System.out.println(arrayListAdapter.pop());
         System.out.println(arrayListAdapter.pop());
 
         // Observer
@@ -104,9 +97,9 @@ public class Main {
         } catch (IOException e) {
             System.err.println(e);
         }
-        
+
         // Composite
-        
+
         File file1 = new File();
         file1.setName("File1");
         file1.setSize(1);
