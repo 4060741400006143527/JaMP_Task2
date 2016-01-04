@@ -3,15 +3,17 @@ package com.epam.jamp.patterns.decorator;
 import com.epam.jamp.patterns.model.Person;
 import java.util.List;
 
-public class CapitalLetterPersonInputStreamDecorator extends PersonInputStreamDecorator {
+public class CapitalLetterPersonInputStreamDecorator implements FilePersonInputStream {
+    
+    private final FilePersonInputStream personInputStream;
 
-    public CapitalLetterPersonInputStreamDecorator(PersonInputStream personInputStream) {
-        super(personInputStream);
+    public CapitalLetterPersonInputStreamDecorator(FilePersonInputStream personInputStream) {
+         this.personInputStream = personInputStream;
     }
 
     @Override
     public List<Person> readPersons() {
-        List<Person> persons = super.readPersons();
+        List<Person> persons = personInputStream.readPersons();
         persons.forEach(person -> capitalizeName(person));
 
         return persons;

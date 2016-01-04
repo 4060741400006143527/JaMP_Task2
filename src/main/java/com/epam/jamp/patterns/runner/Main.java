@@ -4,14 +4,22 @@ import com.epam.jamp.patterns.adapter.ArrayListAdapter;
 import com.epam.jamp.patterns.adapter.Stack;
 import com.epam.jamp.patterns.composite.Directory;
 import com.epam.jamp.patterns.composite.File;
-import com.epam.jamp.patterns.decorator.*;
+import com.epam.jamp.patterns.decorator.BasePersonInputStream;
+import com.epam.jamp.patterns.decorator.BasePersonOutputStream;
+import com.epam.jamp.patterns.decorator.CapitalLetterPersonInputStreamDecorator;
+import com.epam.jamp.patterns.decorator.FilePersonInputStream;
+import com.epam.jamp.patterns.decorator.FilePersonOutputStream;
+import com.epam.jamp.patterns.decorator.LowLetterPersonOutputStreamDecorator;
 import com.epam.jamp.patterns.factory.ServiceFactory;
 import com.epam.jamp.patterns.factory.ServiceType;
 import com.epam.jamp.patterns.factory.person.PersonService;
 import com.epam.jamp.patterns.model.Person;
-import com.epam.jamp.patterns.observer.*;
-import com.epam.jamp.patterns.proxy.FilePersonServiceProxy;
-
+import com.epam.jamp.patterns.observer.LongestWordKeeper;
+import com.epam.jamp.patterns.observer.NumberCounter;
+import com.epam.jamp.patterns.observer.TextData;
+import com.epam.jamp.patterns.observer.WordCounter;
+import com.epam.jamp.patterns.observer.WordReverser;
+import com.epam.jamp.patterns.proxy.PersonServiceProxy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -127,17 +135,17 @@ public class Main {
         
         // Decorator
         
-        PersonInputStreamDecorator inputStreamDecorator = new CapitalLetterPersonInputStreamDecorator(new BasePersonInputStream());
+        FilePersonInputStream inputStreamDecorator = new CapitalLetterPersonInputStreamDecorator(new BasePersonInputStream());
         List<Person> persons = inputStreamDecorator.readPersons();
         persons.forEach(p -> System.out.println(p.getFirstName()));
 
-        PersonOutputStreamDecorator outputStreamDecorator = new LowLetterPersonOutputStreamDecorator(new BasePersonOutputStream());
+        FilePersonOutputStream outputStreamDecorator = new LowLetterPersonOutputStreamDecorator(new BasePersonOutputStream());
         Person person = new Person("Kate", "Kim", 23, 23);
         outputStreamDecorator.writePerson(person);
        
         // Proxy
         
-        PersonService personService = new FilePersonServiceProxy();
+        PersonService personService = new PersonServiceProxy();
         System.out.println(personService.read("Ann").get(0).getSecondName());
     }
 }

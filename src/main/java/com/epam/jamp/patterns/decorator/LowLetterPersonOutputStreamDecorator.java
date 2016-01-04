@@ -2,16 +2,18 @@ package com.epam.jamp.patterns.decorator;
 
 import com.epam.jamp.patterns.model.Person;
 
-public class LowLetterPersonOutputStreamDecorator extends PersonOutputStreamDecorator{
-
-    public LowLetterPersonOutputStreamDecorator(PersonOutputStream personOutputStream) {
-        super(personOutputStream);
+public class LowLetterPersonOutputStreamDecorator implements FilePersonOutputStream {
+    
+    private final FilePersonOutputStream personOutputStream;
+    
+    public LowLetterPersonOutputStreamDecorator(FilePersonOutputStream personOutputStream) {
+        this.personOutputStream = personOutputStream;
     }
 
     @Override
     public void writePerson(Person person) {
         lowerCaseName(person);
-        super.writePerson(person); 
+        personOutputStream.writePerson(person); 
     }
 
  private Person lowerCaseName(Person person) {

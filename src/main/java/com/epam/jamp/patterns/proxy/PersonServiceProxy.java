@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FilePersonServiceProxy implements PersonService {
+public class PersonServiceProxy implements PersonService {
 
     private FilePersonService filePersonService;
     private DBPersonService dbPersonService;
     private final Map<String, List<Person>> cachedPersons;
 
-    public FilePersonServiceProxy() {
+    public PersonServiceProxy() {
         cachedPersons = new HashMap<>();
     }
 
