@@ -1,2 +1,4 @@
-Anna,Popova,28,3kate,Kim,23,23
+Anna,Popova,28,3
+kate,Kim,23,23
+kate,Kim,23,23
 kate,Kim,23,23

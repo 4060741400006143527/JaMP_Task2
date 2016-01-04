@@ -1,16 +1,20 @@
 package com.epam.jamp.patterns.runner;
 
-import com.epam.jamp.patterns.adapter.ArrayListAdapter;
+import com.epam.jamp.patterns.adapter.LinkedListAdapter;
 import com.epam.jamp.patterns.adapter.Stack;
+import com.epam.jamp.patterns.bridge.PersistentAccount;
+import com.epam.jamp.patterns.bridge.PersistentAccountImpl;
 import com.epam.jamp.patterns.composite.Directory;
 import com.epam.jamp.patterns.composite.File;
+import com.epam.jamp.patterns.db.AccountDaoImpl;
+import com.epam.jamp.patterns.db.BillDaoImpl;
 import com.epam.jamp.patterns.decorator.*;
 import com.epam.jamp.patterns.factory.ServiceFactory;
 import com.epam.jamp.patterns.factory.ServiceType;
 import com.epam.jamp.patterns.factory.person.PersonService;
 import com.epam.jamp.patterns.model.Person;
 import com.epam.jamp.patterns.observer.*;
-import com.epam.jamp.patterns.proxy.FilePersonServiceProxy;
+import com.epam.jamp.patterns.proxy.PersonServiceProxy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +27,7 @@ import java.util.stream.Stream;
 
 public class Main {
 
-    public static void main(String[] arg) throws SQLException {
+    public static void main(String[] arg) throws SQLException, ClassNotFoundException {
 
         // Adapter
 
@@ -140,5 +144,10 @@ public class Main {
         
         PersonService personService = new PersonServiceProxy();
         System.out.println(personService.read("Ann").get(0).getSecondName());
+
+        // Bridge
+
+        PersistentAccount persistentAccount = new PersistentAccountImpl(new AccountDaoImpl(), new BillDaoImpl());
+        persistentAccount.open("ANNA ACCOUNT");
     }
 }

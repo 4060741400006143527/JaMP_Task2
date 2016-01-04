@@ -4,6 +4,7 @@ import com.epam.jamp.patterns.model.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AccountDaoImpl implements AccountDao {
@@ -22,8 +23,8 @@ public class AccountDaoImpl implements AccountDao {
     public void update(Account account) throws SQLException, ClassNotFoundException {
         try (Connection connection = connectionCreator.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement("UPDATE Account SET NAME = ? WHERE ID = ?")) {
-                statement.setLong(1, account.getId());
-                statement.setString(2, account.getName());
+                statement.setLong(2, account.getId());
+                statement.setString(1, account.getName());
                 statement.execute();
             }
         }
@@ -40,6 +41,24 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public Account find(String accountName) throws SQLException, ClassNotFoundException {
-        return null;
+        Account account = null;
+        try (Connection connection = connectionCreator.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM Account WHERE NAME = ?")) {
+                statement.setString(1, accountName);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        account = parse(resultSet);
+                    }
+                }
+            }
+        }
+        return account;
+    }
+
+    private Account parse(ResultSet resultSet) throws SQLException {
+        Account account = new Account();
+        account.setId(resultSet.getLong("ID"));
+        account.setName(resultSet.getString("NAME"));
+        return account;
     }
 }
